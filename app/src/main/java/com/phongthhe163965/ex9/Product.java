@@ -1,6 +1,11 @@
 package com.phongthhe163965.ex9;
 
-public class Product {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Product implements Parcelable {
     private String styleId;
     private String brand;
     private String price;
@@ -17,6 +22,26 @@ public class Product {
         this.info = info;
         this.searchImage = searchImage;
     }
+
+    protected Product(Parcel in) {
+        styleId = in.readString();
+        brand = in.readString();
+        price = in.readString();
+        info = in.readString();
+        searchImage = in.readString();
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
 
     public String getStyleId() {
         return styleId;
@@ -56,5 +81,19 @@ public class Product {
 
     public void setSearchImage(String searchImage) {
         this.searchImage = searchImage;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(styleId);
+        dest.writeString(brand);
+        dest.writeString(price);
+        dest.writeString(info);
+        dest.writeString(searchImage);
     }
 }

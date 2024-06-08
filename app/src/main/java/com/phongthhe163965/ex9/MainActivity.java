@@ -19,12 +19,13 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private Ex9Adapter adapter;
     private List<Product> list;
-
+    Ex10CartManager cartManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.ex9Listview);
+        cartManager = Ex10CartManager.getInstance();
         list = new ArrayList<>();
         adapter = new Ex9Adapter(this, list);
         listView.setAdapter(adapter);
